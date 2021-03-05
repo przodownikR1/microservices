@@ -1,0 +1,107 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    lazy-initialization: false
+  application:
+    name: car-service
+  quartz:
+    auto-startup: false
+  kafka:
+    streams:
+      bootstrap-servers:
+        - localhost:9092
+    admin:
+      client-id: ${spring.application.name}
+      fail-fast: true
+  cloud:
+    stream:
+      bindings:
+        carProducer:
+          destination: sandbox
+          contentType: application/json
+          group: ${spring.application.name}
+          binder: kafka
+          consumer:
+            headerMode: none
+        carConsumer:
+          destination: sandbox
+          contentType: application/json
+          group: ${spring.application.name}
+          binder: kafka
+          consumer:
+            headerMode: none
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+        health-timeout: 60
+        auto-create-topics: false
+        min-partition-count: 1
+        requiredAcks: 1
+        headers: x-retries
+        configuration:
+          auto.offset.reset: earliest
+      default-binder: kafka
+kafka:
+  enabled: true
+server:
+  port: 8082
+  compression:
+    min-response-size: 1KB
+  servlet:
+    session:
+      cookie:
+        http-only: true
+        secure: true
+  shutdown: graceful
+
+logging:
+  level:
+    root: info
+
+management:
+  info:
+    git:
+      enabled: true
+      mode: full
+  health:
+    probes:
+      enabled: true
+    defaults:
+      enabled: true
+    diskspace:
+      enabled: true
+      threshold: 100MB
+      path:
+    ping:
+      enabled: true
+  endpoints:
+    web:
+      base-path: /ops
+      exposure:
+        include: health, info, metrics, prometheus, bindings, env, configprops, loggers
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    env:
+      enabled: true
+    configprops:
+      enabled: true
+  metrics:
+    distribution:
+      percentiles[http.server.requests]: 0.95, 0.99
+      percentiles-histogram[http.server.requests]: true
+      sla[http.server.requests]: 10ms, 100ms
+
+    enable:
+      http: true
+      jvm: true
+      logback: true
+      process: true
+      system: true
+      
