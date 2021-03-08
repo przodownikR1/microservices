@@ -1,0 +1,58 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    lazy-initialization: false
+  application:
+    name: client-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/car
+    password: postgres
+    username: car
+    platform: postgres
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-test-query: SELECT 1
+      pool-name: carmanagementTest
+      jdbc-url: jdbc:postgresql://localhost:5432/car
+      maximum-pool-size: 5
+      minimum-idle: 2
+      connection-timeout: 10000
+      auto-commit: true
+      max-lifetime: 50000
+      idle-timeout: 20000
+      sql-script-encoding: utf-8
+
+  quartz:
+    auto-startup: false
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    show-sql: true
+kafka:
+  enable: false
+  name: test
+rabbit:
+  enabled: false
+  name: test
+jms:
+  enabled: true
+  name: test
+
+server:
+  port: 9918
+  min-response-size: 1KB
+  servlet:
+    session:
+      cookie:
+        http-only: true
+        secure: true
+  shutdown: graceful
+
+logging:
+  level:
+    root: info
