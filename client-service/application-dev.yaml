@@ -21,8 +21,6 @@ spring:
       auto-commit: true
       max-lifetime: 50000
       idle-timeout: 20000
-      sql-script-encoding: utf-8
-
   quartz:
     auto-startup: false
   jpa:
@@ -34,17 +32,17 @@ spring:
     database: postgresql
     show-sql: true
 kafka:
-  enable: false
-  name: dev
+  enable: true
+  name: bocian
 rabbit:
-  enabled: false
-  name: dev
+  enabled: true
+  name: kalina
 jms:
-  enabled: false
-  name: dev
+  enabled: true
+  name: borowiec
 
 server:
-  port: 9914
+  port: 8084
   min-response-size: 1KB
   servlet:
     session:
@@ -55,4 +53,4 @@ server:
 
 logging:
   level:
-    root: debug
+    root: info
