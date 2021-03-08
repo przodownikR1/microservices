@@ -7,7 +7,7 @@ spring:
   cloud:
     config:
       override-system-properties: false
-      allow-override: true
+      allow-override: false
       override-none: true  
   datasource:
     driver-class-name: org.postgresql.Driver

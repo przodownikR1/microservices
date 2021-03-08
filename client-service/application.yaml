@@ -4,6 +4,11 @@ spring:
     lazy-initialization: false
   application:
     name: client-service
+  cloud:
+    config:
+      override-system-properties: false
+      allow-override: true
+      override-none: false   
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/car
