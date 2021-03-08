@@ -34,7 +34,7 @@ spring:
     database: postgresql
     show-sql: true
 kafka:
-  enable: false
+  enabled: false
   name: test
 rabbit:
   enabled: false
