@@ -3,7 +3,12 @@ spring:
     allow-bean-definition-overriding: true
     lazy-initialization: false
   application:
-    name: client-service
+    name: client-service    
+  cloud:
+    config:
+      override-system-properties: false
+      allow-override: true
+      override-none: true  
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/car
